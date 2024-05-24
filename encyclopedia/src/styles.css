@@ -1,0 +1,274 @@
+:root {
+  --green-light: #4aba91;
+  --green: #0e5135;
+  --black: #494b4b;
+  --yellow: #cdc844;
+}
+
+body,
+html {
+  height: 100%;
+}
+/** Fuentes **/
+@font-face {
+  font-family: "Zelda Title";
+  src: url(../public/fonts/Triforce.ttf);
+}
+
+@font-face {
+  font-family: "BOTW";
+  src: url(../public/fonts/BOTW.otf);
+}
+
+/** Utilidades **/
+.green-home {
+  background-color: var(--green-light);
+}
+.text-botw {
+  font-family: "BOTW";
+}
+
+.shape-in {
+  animation-duration: 1.5s;
+  background-color: var(--yellow);
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+}
+
+/* Menu navbar */
+.barsMenu {
+  font-size: 30px;
+}
+.nav-desktop {
+  display: flex;
+}
+
+.nav-mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .nav-mobile {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+  }
+}
+
+.nav-mobile {
+  width: 100%;
+}
+
+.navbar-zelda {
+  padding: 2.2rem 4rem;
+}
+
+.navbar-brand {
+  border: 1px solid var(--black);
+  color: var(--black);
+  padding: 0.7rem 2rem;
+}
+
+.navbar-zelda a {
+  font-size: 1.5rem;
+  margin: 0rem 0.7rem;
+  position: relative;
+}
+
+.inverted-6 {
+  --_g1: conic-gradient(from 90deg at 50% 75%, #0d9263 90deg, #0e5135 0)
+    no-repeat;
+  --_g2: conic-gradient(from 90deg at 50% 75%, #0d9263 90deg, #0e5135 0)
+    no-repeat;
+  background: var(--_g1) 0 calc(134% - var(--_p, 0%)),
+    var(--_g2) 0 calc(134% - var(--_p, 0%)),
+    var(--_g1) 100% calc(200% - var(--_p, 0%)),
+    var(--_g2) 100% calc(200% - var(--_p, 0%)), #000;
+  -webkit-background-clip: text, padding-box;
+  background-clip: text, padding-box;
+  background-size: 50.2% 400%;
+  color: var(--green);
+  font-family: "Zelda Title";
+  font-size: 20px;
+  font-weight: 500;
+  padding: 0.5rem 2rem;
+  text-decoration: none;
+  transition: 0.8s;
+}
+.inverted-6:hover {
+  --_p: 134%;
+  color: white;
+}
+
+.logo {
+  left: 50%;
+  position: absolute;
+}
+
+.logo-img {
+  width: 120px;
+}
+
+
+
+/** Mobile menu **/
+.content-mobile-menu{
+  background-color: var(--yellow);
+  display: none;
+  height: 110vh;
+  left: 0;
+  padding: 2rem 1rem;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 4;
+}
+.content-mobile-menu.open{
+  display: block;
+}
+
+.content-mobile-menu ul {
+  line-height: 2.5rem;
+  list-style: none;
+  margin-top: 5rem;
+}
+
+.content-mobile-menu ul li a{
+  font-size: 4rem;
+  line-height: 7rem;
+}
+
+.close-btn {
+  color: var(--green);
+  font-size: 3rem;
+  position: absolute;
+  right: 40px;
+  top: 40px;
+}
+
+/** Content **/
+.content-zelda {
+  margin: auto;
+  max-width: 1400px;
+  min-height: 100%;
+  padding: 5rem 0;
+}
+
+@media (max-width: 1400px) {
+  .content-zelda {
+    max-width: 90%;
+  }
+}
+
+.small-rec {
+  border: 1px solid var(--black);
+  border-bottom: none;
+  margin-left: 4rem;
+  max-width: 400px;
+}
+
+.big-rec {
+  border: 1px solid var(--black);
+}
+
+.small-rec,
+.big-rec {
+  padding: 15px 3rem 0.1rem;
+}
+
+.big-rec .text-botw,
+.small-rec .text-botw {
+  animation-duration: 2.5s;
+}
+
+.big-rec h1 {
+  font-size: 9rem;
+}
+
+@media (max-width: 600px) {
+  .big-rec h1 {
+    font-size: 5rem;
+    line-height: 4rem;
+  }
+
+  .small-rec h3 {
+    font-size: 1.2rem;
+    line-height: 1rem;
+  }
+}
+
+.pargh-rec {
+  border: 1px solid var(--black);
+  border-top: none;
+  display: inline-block;
+
+  padding: 15px 1rem;
+  width: 250px;
+}
+
+@media (max-width: 600px) {
+  .pargh-rec {
+    display: block;
+  }
+}
+
+.pargh-rec.left {
+  border-right: none;
+  margin-left: 60%;
+}
+
+@media (max-width: 1400px) {
+  .pargh-rec.left {
+    margin-left: 50%;
+  }
+}
+
+@media (max-width: 900px) {
+  .pargh-rec.left {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pargh-rec.left {
+    border-bottom: none;
+    border-right: 1px solid var(--black);
+    margin-left: 20px;
+  }
+}
+
+.pargh-rec.right {
+  position: absolute;
+}
+
+@media (max-width: 600px) {
+  .pargh-rec.right {
+    border-top: none;
+    margin-bottom: 10rem;
+    margin-left: 20px;
+  }
+}
+
+.pargh-rec p {
+  font-size: 25px;
+}
+
+@media (max-width: 600px) {
+  .pargh-rec p {
+    font-size: 20px;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translate3d(0, 17%, 0);
+  }
+}
+
