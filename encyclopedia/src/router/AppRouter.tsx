@@ -1,11 +1,16 @@
 import { Route, Routes } from "react-router-dom";
 import { GamesPage, HomePage } from "../zelda";
 import { Navbar } from "../ui";
+import { useEffect } from "react";
 
 export const AppRouter = () => {
+  useEffect(() => {
+    const classExists = document.querySelector("body") !== null;
+    if (!classExists) return;
+    document.body.classList.add("green-home");
+  });
   return (
     <>
-      <div className="shape-in animate__animated animate__slideOutLeft"></div>
       <Navbar />
       <Routes>
         <Route path="/games" element={<GamesPage />} />

@@ -21,6 +21,9 @@ html {
 }
 
 /** Utilidades **/
+p{
+  font-size: 1.3rem;
+}
 .green-home {
   background-color: var(--green-light);
 }
@@ -33,6 +36,7 @@ html {
   background-color: var(--yellow);
   height: 100vh;
   position: absolute;
+  top: 0;
   width: 100%;
   z-index: 3;
 }
@@ -115,10 +119,8 @@ html {
   width: 120px;
 }
 
-
-
 /** Mobile menu **/
-.content-mobile-menu{
+.content-mobile-menu {
   background-color: var(--yellow);
   display: none;
   height: 110vh;
@@ -130,7 +132,7 @@ html {
   width: 100%;
   z-index: 4;
 }
-.content-mobile-menu.open{
+.content-mobile-menu.open {
   display: block;
 }
 
@@ -140,7 +142,7 @@ html {
   margin-top: 5rem;
 }
 
-.content-mobile-menu ul li a{
+.content-mobile-menu ul li a {
   font-size: 4rem;
   line-height: 7rem;
 }
@@ -272,3 +274,21 @@ html {
   }
 }
 
+/** Gamespage **/
+.front-page-img {
+  height: 250px;
+  width: 250px;
+  margin-bottom: 0.6rem;
+}
+
+.row-games {
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.game-info {
+  text-align: center;
+  width: 33%;
+}

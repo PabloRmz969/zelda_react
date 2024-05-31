@@ -1,26 +1,11 @@
-import { useEffect } from "react";
-
 export const HomePage = () => {
-  useEffect(() => {
-    const classExists = document.querySelector("body") !== null;
-    if (!classExists) return;
-    document.body.classList.add("green-home");
-    
-    const shapeYellow: HTMLElement | null = document.getElementById(
-      "shape-in"
-    );
-    if(shapeYellow !== null) {
-      
-    }
-  });
-
-
   return (
     <>
+      <div className="shape-in animate__animated animate__slideOutLeft"></div>
       <div className="content-zelda">
         <div className="small-rec">
           <h3 className="text-botw text-center animate__animated animate__fadeInUp">
-            It's a nice day to{" "}
+            It's a nice day to
           </h3>
         </div>
         <div className="big-rec">
