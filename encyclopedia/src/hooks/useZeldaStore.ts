@@ -14,18 +14,20 @@ export const useZeldaStore = () => {
   const startSearchGames = async () => {
     dispatch(startLoadingInfo());
     try {
-      const { data } = await ZeldaApi.get("/games?limit=6");
+      const { data } = await ZeldaApi.get("/games");
       let { data: games_data } = data;
-    
+      //games_data = games_data.filter((game: GameInfo) => game.id != '5f6ce9d805615a85623ec2ce');
+      
       for (let i = 0; i < games_data.length; i++) {
-        const  id  = games_data[i].id;
+        const id = games_data[i].id;
         const { data: data_c } = await ComplementApi.get(
           `/encyclopedia/info?id=${id}`
         );
-        const { ok, image } = data_c;
-        console.log(image)
-        games_data[i].image = ok && `/public/images/games/front/${image}`;
+        let { ok, image } = data_c;
+        games_data[i].image = ok ? `/public/images/games/front/${image}` : image;
       }
+      
+      games_data = games_data.filter((game : GameInfo) => game.image != 'Id no encontrado');
       dispatch(setGames(games_data));
     } catch (error) {
       console.log(error);

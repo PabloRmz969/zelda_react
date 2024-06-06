@@ -7,7 +7,7 @@ export type GameInfo = {
   name: string;
   publisher: string;
   released_date: string;
-  image: string;
+  image: string ;
 };
 interface Istate {
   games: GameInfo[];
