@@ -1,14 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { GameInfo } from "../../zelda/types";
 
-export type GameInfo = {
-  description: string;
-  developer: string;
-  id: string;
-  name: string;
-  publisher: string;
-  released_date: string;
-  image: string ;
-};
+
 interface Istate {
   games: GameInfo[];
   isLoading: boolean;

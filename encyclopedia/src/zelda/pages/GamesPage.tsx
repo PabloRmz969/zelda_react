@@ -1,101 +1,149 @@
-import { useEffect, useState } from "react";
-import { useZeldaStore } from "../../hooks";
-import { Game } from "../components/Game";
+import { useEffect } from "react";
 
-import $ from "jquery";
+import { Games } from "../components";
 import ReactScrollWheelHandler from "react-scroll-wheel-handler";
+import $ from "jquery";
 
-const assignClass = (type_class: string) => {
-  const active_img = $(".game-info.active .front-page-img");
-  const active_txt = $(".game-info.active .title-front");
-  $(active_img).removeClass(
-    "animate__slideOutUp animate__slideInUp animate__slideInDown animate__slideOutDown"
+const back_org = (pos: JQuery<HTMLElement>) => {
+  $(pos).css(
+    "transform",
+    `translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
+    rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`
   );
-  $(active_txt).removeClass(
-    "animate__slideOutUp animate__slideInUp animate__slideInDown animate__slideOutDown"
-  );
-  $(active_img).addClass(type_class);
-  $(active_txt).addClass(type_class);
-};
-
-const before = () => {
-  const active = $(".game-info.active");
-  const before = $(active).prev();
-  assignClass("animate__slideOutDown");
-  setTimeout(() => {
-    window.scrollTo({
-      top: $(before).position().top,
-      //behavior: "smooth",
-    });
-    $(active).removeClass("active");
-    $(before).addClass("active");
-    assignClass("animate__slideInDown");
-  }, 300);
 };
 
 const next = () => {
-  const active = $(".game-info.active");
-  const nxt = $(active).next();
-  assignClass("animate__slideOutUp");
-  setTimeout(() => {
-    $(active).removeClass("active");
-    $(nxt).addClass("active");
-    assignClass("animate__slideInUp");
-    window.scrollTo({
-      top: $(nxt).position().top,
-      //behavior: "smooth",
-    });
-    console.log(
-      $(".game-info.active .title-front"),
-      $(".game-info.active .title-front").position().top,
-      
+  const no_images = $(".front-page-img").length;
+  const active_img = $(".front-page-img.active");
+  const pos = $(".front-page-img.active").data("pos");
+  if (pos && parseInt(pos) < no_images) {
+    const nxt_img = $(`#img-${pos && parseInt(pos) + 1}`);
+    const colors_top = $(`.fronts-imgs._${pos - 1} .colors-top`);
+    const colors_left = $(`.fronts-imgs._${pos - 1} .colors-left`);
+    const colors_right = $(`.fronts-imgs._${pos - 1} .colors-right`);
+    const nxt_colors_top = $(`.fronts-imgs._${pos} .colors-top`);
+    const nxt_colors_left = $(`.fronts-imgs._${pos} .colors-left`);
+    const nxt_colors_right = $(`.fronts-imgs._${pos} .colors-right`);
+
+    $(active_img).css(
+      "transform",
+      `translate3d(0px, -${pos * 110}vh, 0px) scale3d(1, 1, 1) rotateX(0deg)
+      rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`
     );
-    $(".game-info.active .title-front").position().top < 40 && next();
-  }, 500);
+    $(colors_top).removeClass('active');
+    $(colors_top).css(
+      "transform",
+      `translate3d(-50vw, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
+      rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`
+    );
+    $(colors_left).css(
+      "transform",
+      `translate3d(0px, 50vh, 0px) scale3d(1, 1, 1) rotateX(0deg)
+      rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`
+    );
+    $(colors_right).css(
+      "transform",
+      `translate3d(0px, -50vh, 0px) scale3d(1, 1, 1) rotateX(0deg)
+      rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`
+    );
+    let duration = pos / 10 + 2.1;
+    pos > 1 && $(active_img).css("transition-duration", `${duration}s`);
+    //transition-duration: 1s
+    $(nxt_colors_top).addClass('active');
+    back_org(nxt_colors_top);
+    back_org(nxt_colors_left);
+    back_org(nxt_colors_right);
+    back_org(nxt_img);
+
+    $(active_img).removeClass("active");
+    $(nxt_img).addClass("active");
+  }
+};
+
+const prev = () => {
+  const active_img = $(".front-page-img.active");
+  const id_active =
+    active_img && $(active_img)?.attr("id")?.toString().replace("img-", "");
+  if (id_active && parseInt(id_active) > 1) {
+    const prv_img = $(`#img-${id_active && parseInt(id_active) - 1}`);
+    const colors_top = $(
+      `.fronts-imgs._${parseInt(id_active) - 1} .colors-top`
+    );
+    const colors_left = $(
+      `.fronts-imgs._${parseInt(id_active) - 1} .colors-left`
+    );
+    const colors_right = $(
+      `.fronts-imgs._${parseInt(id_active) - 1} .colors-right`
+    );
+    const prv_colors_top = $(
+      `.fronts-imgs._${parseInt(id_active) - 2} .colors-top`
+    );
+    const prv_colors_left = $(
+      `.fronts-imgs._${parseInt(id_active) - 2} .colors-left`
+    );
+    const prv_colors_right = $(
+      `.fronts-imgs._${parseInt(id_active) - 2} .colors-right`
+    );
+
+    $(active_img).css(
+      "transform",
+      `translate3d(0px, 110vh, 0px) scale3d(1, 1, 1) rotateX(0deg)
+    rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`
+    );
+
+    $(prv_img).css("transition-duration", `1s`);
+    back_org(prv_img);
+
+    $(colors_top).css(
+      "transform",
+      `translate3d(50vw, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
+      rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`
+    );
+    $(colors_top).removeClass('active');
+    $(colors_left).css(
+      "transform",
+      `translate3d(0px, -50vh, 0px) scale3d(1, 1, 1) rotateX(0deg)
+      rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`
+    );
+    $(colors_right).css(
+      "transform",
+      `translate3d(0px, 50vh, 0px) scale3d(1, 1, 1) rotateX(0deg)
+      rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`
+    );
+    $(prv_colors_top).addClass('active');
+    back_org(prv_colors_top);
+    back_org(prv_colors_left);
+    back_org(prv_colors_right);
+
+    $(active_img).removeClass("active");
+    $(prv_img).addClass("active");
+  }
 };
 
 export const GamesPage = () => {
-  const { startSearchGames, games } = useZeldaStore();
-
-  const [crEleme, setCrEleme] = useState(0);
-
   useEffect(() => {
-    startSearchGames();
     document.body.classList.add("games-scroll");
-    $(window).scroll(function () {
-      console.log($(window).scrollTop(), $(".game-info.active .title-front").position().top);
-    });
+    setTimeout(() => {
+      $(".shape-in").addClass("animate__slideOutLeft");
+    }, 400);
   }, []);
 
   return (
-    <>
-      <ReactScrollWheelHandler
-        className="scroll-wheel-container"
-        style={{
-          height: `calc(${games.length}*100vh)`
-        }}
-        upHandler={() => {
-          //console.log("scroll up");
-          crEleme > 0 && setCrEleme(crEleme - 1);
-          before();
-        }}
-        downHandler={() => {
-          //console.log("scroll down");
-          setCrEleme(crEleme + 1);
-          next();
-        }}
-      >
-        <div className="shape-in animate__animated animate__slideOutLeft"></div>
-        <div className="container">
-          {games.length > 0 && (
-            <div className="container-scroll">
-              {games.map((game, index) => (
-                <Game key={game.id} game={{ ...game }} ind={index} />
-              ))}
-            </div>
-          )}
+    <ReactScrollWheelHandler
+      style={{ height: "100vh" }}
+      upHandler={() => {
+        prev();
+      }}
+      downHandler={() => {
+        next();
+      }}
+    >
+      <div className="shape-in animate__animated"></div>
+      <div className="container">
+        <div className="container-scroll">
+          <Games />
         </div>
-      </ReactScrollWheelHandler>
-    </>
+      </div>
+    </ReactScrollWheelHandler>
   );
 };

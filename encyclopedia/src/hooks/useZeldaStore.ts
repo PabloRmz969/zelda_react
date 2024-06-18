@@ -1,11 +1,11 @@
 import { ComplementApi, ZeldaApi } from "../api";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  GameInfo,
   setGames,
   startLoadingInfo,
 } from "../store/zelda/zeldaSlice";
 import { ZeldaState } from "../store";
+import { GameInfo } from "../zelda/types";
 
 export const useZeldaStore = () => {
   const dispatch = useDispatch();
