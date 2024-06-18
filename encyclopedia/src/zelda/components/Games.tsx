@@ -97,14 +97,14 @@ export const Games = () => {
               </div>
             </div>
           </div>
-          <div className="content-titles">
+          <div className={`content-titles _${index}`}>
             <div
               className="titles-content"
               style={{
                 willChange: "transform",
                 transform:
                   index === 0
-                    ? "translate3d(0px, 10vh, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)"
+                    ? "translate3d(0px, 50vh, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)"
                     : "translate3d(0px, 100vh, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
                 transformStyle: "preserve-3d",
               }}

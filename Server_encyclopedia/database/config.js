@@ -9,7 +9,7 @@ const config = {
     user: process.env.USERNAME_SQL,
     password: process.env.PASSWORD_SQL,
     database: process.env.DATABASE,
-    port: '3307'
+    port: '3306'
 }
 
 

@@ -441,8 +441,13 @@ h1.title-front {
   position: absolute;
   top: 50vh;
   width: 25vw;
-  transition-duration: 1s;
   z-index: 1;
+}
+
+.colors-right,
+.colors-left,
+.titles-content{
+  transition-duration: 1s;
 }
 .colors-right {
   left: 25vw;
