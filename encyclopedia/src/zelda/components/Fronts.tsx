@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useZeldaStore } from "../../hooks";
 import { GameInfo } from "../types";
+import { Link } from "react-router-dom";
 
 const colors_top_hex = ["#c3f3bc", "#fae906", "#fdffe0", "#f5941b", "#c4acb4"];
 const colors_left_hex = ["#30646f", "#6b5e31", "#0f68b8", "#727272", "#82a0a4"];
@@ -12,16 +13,12 @@ const colors_right_hex = [
   "#c2d849",
 ];
 
-export const Games = () => {
-  const { startSearchGames, games } = useZeldaStore();
+export const Fronts = () => {
+  const { games } = useZeldaStore();
 
   useEffect(() => {
-    startSearchGames();
     document.body.classList.add("games-scroll");
   }, []);
-  useEffect(() => {
-    console.log(games);
-  }, [games]);
 
   return (
     <>
@@ -93,23 +90,10 @@ export const Games = () => {
               }}
             >
               <div className="image-item">
-                <img src={game.image} alt={game.name} />
+                <Link to={`/game/${game.id}`} className="alink">
+                  <img src={game.image} alt={game.name} />
+                </Link>
               </div>
-            </div>
-          </div>
-          <div className={`content-titles _${index}`}>
-            <div
-              className="titles-content"
-              style={{
-                willChange: "transform",
-                transform:
-                  index === 0
-                    ? "translate3d(0px, 50vh, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)"
-                    : "translate3d(0px, 100vh, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
-                transformStyle: "preserve-3d",
-              }}
-            >
-              <p>{game.name}</p>
             </div>
           </div>
         </div>

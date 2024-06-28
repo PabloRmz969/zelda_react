@@ -22,7 +22,10 @@ export const zeldaSlice = createSlice({
       state.isLoading = false;
       state.games = payload;
     },
+    clearGames: (state)=> {
+      state.games = []
+    }
   },
 });
 
-export const { startLoadingInfo, setGames } = zeldaSlice.actions;
+export const { startLoadingInfo, setGames, clearGames } = zeldaSlice.actions;
