@@ -11,8 +11,8 @@ const initialState : Istate = {
     games: [],
     isLoading: false
 }
-export const zeldaSlice = createSlice({
-  name: "zelda",
+export const descriptionSlice = createSlice({
+  name: "description",
   initialState,
   reducers: {
     startLoadingInfo: (state) => {
@@ -28,4 +28,4 @@ export const zeldaSlice = createSlice({
   },
 });
 
-export const { startLoadingInfo, setGames, clearGames } = zeldaSlice.actions;
+export const { startLoadingInfo, setGames, clearGames } = descriptionSlice.actions;

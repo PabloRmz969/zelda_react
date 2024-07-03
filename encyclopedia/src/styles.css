@@ -58,16 +58,16 @@ body.green-home.games-scroll {
   border: 1px solid;
 } */
 
-.alink{
+.alink {
   color: inherit;
   text-decoration: none;
 }
 
-.cream{
+.cream {
   background-color: #fdffe0;
 }
 
-.left-side{
+.left-side {
   height: 100vh;
   left: 0;
   position: absolute;
@@ -75,7 +75,7 @@ body.green-home.games-scroll {
   width: 50vw;
 }
 
-.right-side{
+.right-side {
   height: 100vh;
   left: 50vw;
   position: absolute;
@@ -83,7 +83,7 @@ body.green-home.games-scroll {
   width: 50vw;
 }
 
-.fix{
+.fix {
   position: fixed;
 }
 
@@ -542,14 +542,13 @@ h1.title-front {
   z-index: 3;
 }
 
-.container-bullet{
+.container-bullet {
   cursor: pointer;
   padding: 3px 9px;
 }
 
-
 .container-bullet.active,
-.container-bullet:hover{
+.container-bullet:hover {
   border: 1px solid white;
   -webkit-transition: border 400ms linear;
   -ms-transition: border 400ms linear;
@@ -568,15 +567,14 @@ h1.title-front {
   transition: color 400ms linear;
 }
 body .tooltip-names {
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   font-family: "Zelda Title";
   font-size: 25px;
 }
 
-
 /**Single game**/
 
-.title-game{
+.title-game {
   left: 7vw;
   max-width: 35vw;
   position: relative;
@@ -584,39 +582,61 @@ body .tooltip-names {
   top: 60vh;
 }
 
-.title-game h1{
+.title-game h1 {
   font-family: "Zelda Title";
   font-size: 50px;
 }
 
-.contet-synops{
+.contet-synops {
   padding: 0 60px;
   position: relative;
   top: 20vh;
 }
 
 .fix.sinopsis {
-  position: relative;
   font-family: "Zelda Title";
+  position: relative;
 }
 
-.fix.sinopsis h2{
+.fix.sinopsis h2 {
   font-size: 50px;
 }
-.hr-synops{
+.hr-synops {
   border: 2px solid black;
 }
 
-.divide{
-  gap: 80px
+.divide {
+  margin-bottom: 2rem;
 }
 
-.sub-title{
+.sub-title {
   font-family: "BOTW";
   font-size: 35px;
+  min-width: 30%;
+  height: 30px;
+  position: sticky;
+  top: 0;
 }
 
-.content-info{
+.content-info {
   font-family: "Minish";
   font-size: 18px;
 }
+
+body .content-right-game{
+  width: 100% !important;
+  height: 67vh !important;
+}
+
+@media (max-width: 1400px) {
+  .sub-title{
+    font-size: 28px;
+  }
+  .content-info{
+    font-size: 15px;
+  }
+  .content-right-game{
+    height: 60vh !important;
+  }
+}
+

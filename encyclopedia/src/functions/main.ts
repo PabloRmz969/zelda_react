@@ -162,7 +162,7 @@ const changeBullet = async (id: number) => {
         next();
         i++;
       }
-    },750);
+    },650);
   } else {
     const no_prev = active_id - id;
     let i = 0;
@@ -173,7 +173,7 @@ const changeBullet = async (id: number) => {
         prev();
         i++;
       }
-    },750);
+    },650);
   }
 };
 

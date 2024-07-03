@@ -4,7 +4,7 @@ const { db } = require('../../database/config');
 
 const getFront = (req, res = response) => {
     const {id} = req.query;
-    const sqlCh = `SELECT vcha_image FROM portada_game WHERE vcha_id = '${id}'`;
+    const sqlCh = `SELECT vcha_image, vcha_yt FROM games WHERE vcha_id = '${id}'`;
     try {
         db.query(sqlCh, async (err, data, fields) => {
             if (err) {
@@ -14,7 +14,7 @@ const getFront = (req, res = response) => {
                     res.status(201).json({ ok: false, image: 'Id no encontrado' })
                 } else {
                     for (const val of data) {
-                        res.status(200).json({ ok: true, image: val.vcha_image })
+                        res.status(200).json({ ok: true, image: val.vcha_image, video: val.vcha_yt })
                     }
                 }
             }

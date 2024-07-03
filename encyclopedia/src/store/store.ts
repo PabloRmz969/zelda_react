@@ -1,5 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { zeldaSlice } from './zelda/zeldaSlice'
+import { descriptionSlice } from './game/descriptionSlice'
+import { characterSlice } from './characters/characterSlice';
+import { monsterSlice } from './monster/monsterSlice';
+import { bossesSlice } from './bosses/bossesSlice';
+import { dungeonSlice } from './dungeons/dungeonsSlice';
 
 export const store = configureStore({
     middleware: getDefaultMiddleware =>
@@ -7,7 +11,11 @@ export const store = configureStore({
             serializableCheck: false,
         }),
     reducer: {
-        zelda: zeldaSlice.reducer
+        description: descriptionSlice.reducer,
+        characters: characterSlice.reducer,
+        monsters: monsterSlice.reducer,
+        bosses: bossesSlice.reducer,
+        dungeons: dungeonSlice.reducer
     },
 })
 export type AppStore = typeof store;

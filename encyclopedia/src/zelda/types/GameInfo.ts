@@ -6,4 +6,5 @@ export type GameInfo = {
   publisher: string;
   released_date: string;
   image: string;
+  video: string;
 };
