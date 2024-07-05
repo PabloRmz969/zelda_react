@@ -24,7 +24,6 @@ export const useZeldaStore = () => {
     try {
       const { data } = await ZeldaApi.get("/games?limit=50");
       let { data: games_data } = data;
-      //games_data = games_data.filter((game: GameInfo) => game.id != '5f6ce9d805615a85623ec2ce');
 
       for (let i = 0; i < games_data.length; i++) {
         const id = games_data[i].id;

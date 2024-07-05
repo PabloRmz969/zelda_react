@@ -1,4 +1,3 @@
-
 export const functionsJq = () => {
   const back_org = (pos: JQuery<HTMLElement>) => {
     $(pos).css(
@@ -166,6 +165,7 @@ export const functionsJq = () => {
   };
 
   const changeBullet = async (id: number) => {
+    console.log("entra a cambio bullet");
     const active_bull = $(".container-bullet.active");
     const active_id = $(active_bull).data("id");
 
@@ -194,18 +194,41 @@ export const functionsJq = () => {
     }
   };
 
+  const reset_bullet = (noPage: number) => {
+    const current_img = $(`.front-page-img.active`)
+      .attr("id")
+      ?.replace("img-", "");
+      if (current_img){
+        let indx = parseInt(current_img);
+        while (indx > 1) {
+          prev();
+          indx--;
+        }
+      }
+    
+  };
+
   const onPageLoad = () => {
     setTimeout(() => {
       $(".shape-in").addClass("animate__slideOutLeft");
-    }, 400);
+    }, 300);
   };
 
+  const chargingSlide = () => {
+    $(".shape-in").removeClass("animate__slideOutLeft animate__slideInRight");
+    $(".shape-in").addClass("animate__slideInRight");
+    setTimeout(() => {
+      $(".shape-in").addClass("animate__slideOutLeft");
+    }, 1300);
+  };
 
   return {
     back_org,
-    next,
-    prev,
     changeBullet,
-    onPageLoad
+    chargingSlide,
+    next,
+    onPageLoad,
+    prev,
+    reset_bullet,
   };
 };

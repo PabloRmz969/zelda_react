@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useZeldaStore } from "../../hooks";
+import { useEffect, useState } from "react";
 import { GameInfo } from "../types";
 import { Link } from "react-router-dom";
 
@@ -13,18 +12,22 @@ const colors_right_hex = [
   "#c2d849",
 ];
 
-export const Fronts = () => {
-  const { games } = useZeldaStore();
+type Props = {
+  gamePerPage: GameInfo[];
+  noPage: number;
+};
+
+export const Fronts = ({ gamePerPage, noPage }: Props) => {
+  const [plus, setPlus] = useState(0);
 
   useEffect(() => {
-    document.body.classList.add("games-scroll");
-  }, []);
-
+    setPlus((noPage - 1) * 8);
+  }, [noPage]);
   return (
     <>
-      {games.map((game: GameInfo, index: number) => (
+      {gamePerPage.map((game: GameInfo, index: number) => (
         <div key={index}>
-          <div className={`d-flex fronts-imgs _${index}`}>
+          <div className={`d-flex fronts-imgs _${index}`} >
             <div className="colors">
               <div
                 className={index === 0 ? "colors-top active" : "colors-top"}
@@ -76,6 +79,7 @@ export const Fronts = () => {
             </div>
             <div
               id={`img-${index + 1}`}
+              data-id={plus + index}
               className={
                 index == 0 ? "front-page-img active" : "front-page-img"
               }

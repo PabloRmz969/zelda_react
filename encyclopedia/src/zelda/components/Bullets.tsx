@@ -3,24 +3,38 @@ import { useZeldaStore } from "../../hooks";
 import { GameInfo } from "../types";
 import { faSquare } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "react-tooltip";
+import { functionsJq } from "../../helpers";
+import { useEffect, useState } from "react";
 
-export const Bullets = () => {
+type Props = {
+  gamePerPage: GameInfo[];
+  noPage: number;
+};
+
+export const Bullets = ({ gamePerPage, noPage }: Props) => {
   const { games } = useZeldaStore();
+  const { changeBullet } = functionsJq();
+  const [plus, setPlus] = useState(0);
+
+  useEffect(() => {
+    setPlus((noPage - 1) * 8);
+  }, [noPage]);
+
   return (
     <>
       <div className="bullets-games">
-        {games.map((game: GameInfo, index: number) => (
+        {gamePerPage.map((game: GameInfo, index: number) => (
           <div
-            key={index}
-            id={`bull_${index + 1}`}
-            data-id={index + 1}
+            key={`bull_${plus + index}`}
+            id={`bull_${plus + index + 1}`}
+            data-id={plus + index + 1}
             data-tooltip-id={`my-tooltip-${index}`}
             data-tooltip-content={`${game.name}`}
             data-tooltip-variant="success"
             className={
               index === 0 ? "container-bullet active" : "container-bullet"
             }
-            onClick={() => changeBullet(index + 1)}
+            onClick={() => changeBullet(plus + index + 1)}
           >
             <FontAwesomeIcon
               icon={faSquare}

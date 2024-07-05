@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
-import { useZeldaStore } from "../../hooks";
 import { GameInfo } from "../types";
 
-export const Titles = () => {
-  const { games } = useZeldaStore();
-
-  
+type Props = {
+  gamePerPage: GameInfo[];
+};
+export const Titles = ({ gamePerPage }: Props) => {
   return (
     <div className="content-titles">
       <div className="top hidden"></div>
       <div className="center-titles"></div>
-      {games.map((game: GameInfo, index: number) => (
+      {gamePerPage.map((game: GameInfo, index: number) => (
         <div
           key={index}
           className={`titles-text  _${index}`}
@@ -24,7 +23,7 @@ export const Titles = () => {
           }}
         >
           <Link to={`/game/${game.id}`} className="alink">
-            <p className="text-botw">{game.name}</p>
+            <p className="text-botw animate__animated">{game.name}</p>
           </Link>
         </div>
       ))}

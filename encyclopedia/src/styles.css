@@ -54,6 +54,12 @@ body.green-home.games-scroll {
   z-index: 100;
 }
 
+
+
+.games-scroll .shape-in.animate__slideInRight{
+  animation-duration: 0.5s;
+}
+
 /* .square-txt{
   border: 1px solid;
 } */
@@ -85,6 +91,20 @@ body.green-home.games-scroll {
 
 .fix {
   position: fixed;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 2rem;
+  left: 44%;
+}
+
+.pagination button{
+  color: black;
+}
+
+.pagination button.Mui-selected{
+  color: white;
 }
 
 /* Menu navbar */
@@ -538,7 +558,7 @@ h1.title-front {
   gap: 8px;
   left: 35px;
   position: fixed;
-  top: 11vh;
+  top: 33.5%;
   z-index: 3;
 }
 
