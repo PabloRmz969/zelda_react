@@ -22,7 +22,7 @@ export const useZeldaStore = () => {
   const startSearchGames = async () => {
     dispatch(startLoadingInfo());
     try {
-      const { data } = await ZeldaApi.get("/games");
+      const { data } = await ZeldaApi.get("/games?limit=50");
       let { data: games_data } = data;
       //games_data = games_data.filter((game: GameInfo) => game.id != '5f6ce9d805615a85623ec2ce');
 
@@ -63,9 +63,7 @@ export const useZeldaStore = () => {
       games_data.video = ok && video
 
       const games_res = [games_data];
-      // games_data = games_data.filter(
-      //   (game: GameInfo) => game.image != "Id no encontrado"
-      // );
+
       dispatch(setGames(games_res));
     } catch (error) {
       console.error(error);
@@ -107,8 +105,6 @@ export const useZeldaStore = () => {
       console.error(error);
     }
   };
-
-  
 
   return {
     characters,

@@ -6,6 +6,7 @@ import 'react-tooltip/dist/react-tooltip.css'
 
 
 export const ZeldaApp = () => {
+  
   return (
     <>
       <Provider store={store}>

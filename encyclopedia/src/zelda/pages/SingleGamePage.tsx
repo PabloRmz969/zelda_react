@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useZeldaStore } from "../../hooks";
-import { BossInfo, CharacterInfo, GameInfo, MonsterInfo } from "../types";
+import { GameInfo } from "../types";
 import { useBossesStore } from "../../hooks/useBossesStore";
 import { useDungeonsStore } from "../../hooks/useDungeonsStore";
-import { DungeonInfo } from "../types/DungeonInfo";
 import { Scrollbar } from "react-scrollbars-custom";
+import { ListInfo } from "../components/ListInfo";
+import { functionsJq } from "../../helpers";
 
 export const SingleGamePage = () => {
+  const {onPageLoad} = functionsJq();
   const {
     clearGamesA,
     getGame,
@@ -47,9 +49,7 @@ export const SingleGamePage = () => {
     }
   }, [id]);
 
-  // useEffect(() => {
-  //   console.log(games)
-  // },[games])
+
 
   return (
     <>
@@ -76,54 +76,10 @@ export const SingleGamePage = () => {
                   <div className="sub-title">Released date</div>
                   <div className="content-info">{game.released_date}</div>
                 </div>
-                {characters.length > 0 && (
-                  <div className="d-flex divide">
-                    <div className="sub-title">Characters</div>
-                    <div className="content-info">
-                      <ul>
-                        {characters.map((chr: CharacterInfo, index: number) => (
-                          <li key={`ch-${index}`}>{chr.name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
-                {monsters.length > 0 && (
-                  <div className="d-flex divide">
-                    <div className="sub-title">Monsters</div>
-                    <div className="content-info">
-                      <ul>
-                        {monsters.map((mrn: MonsterInfo, index: number) => (
-                          <li key={`mrn-${index}`}>{mrn.name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
-                {bosses.length > 0 && (
-                  <div className="d-flex divide">
-                    <div className="sub-title">Bosses</div>
-                    <div className="content-info">
-                      <ul>
-                        {bosses.map((boss: BossInfo, index: number) => (
-                          <li key={`boss-${index}`}>{boss.name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
-                {dungeons.length > 0 && (
-                  <div className="d-flex divide">
-                    <div className="sub-title">Dungeons</div>
-                    <div className="content-info">
-                      <ul>
-                        {dungeons.map((dungeon: DungeonInfo, index: number) => (
-                          <li key={`dungeon-${index}`}>{dungeon.name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
+                <ListInfo defaultItem={characters} title="Characters" />
+                <ListInfo defaultItem={monsters} title="Monsters" />
+                <ListInfo defaultItem={bosses} title="Bosses" />
+                <ListInfo defaultItem={dungeons} title="Dungeons" />
                 <div className="text-center mt-5">
                   <iframe
                     width="560"

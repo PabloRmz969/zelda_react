@@ -2,15 +2,16 @@ import { useEffect } from "react";
 
 import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 
-import { Fronts } from "../components";
-import { Titles } from "../components/Titles";
-import { Bullets } from "../components/Bullets";
 import { useZeldaStore } from "../../hooks";
+import { Bullets, Fronts, Titles } from "../components";
+import { functionsJq } from "../../helpers";
 
 
 
 export const GamesPage = () => {
   const { clearGamesA, startSearchGames, games } = useZeldaStore();
+  const {next, prev, onPageLoad} = functionsJq();
+
   useEffect(() => {
     clearGamesA();
     startSearchGames();

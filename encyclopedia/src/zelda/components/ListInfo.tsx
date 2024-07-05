@@ -1,18 +1,18 @@
 import { BossInfo, CharacterInfo, MonsterInfo } from "../types";
 import { DungeonInfo } from "../types/DungeonInfo";
-
-export const ListInfo = (
-  characters: CharacterInfo[] | MonsterInfo[] | BossInfo[] | DungeonInfo[],
-  title : string
-) => {
+type Props = {
+  defaultItem: CharacterInfo[] | MonsterInfo[] | BossInfo[] | DungeonInfo[];
+  title: string;
+};
+export const ListInfo = ({ defaultItem, title }: Props) => {
   return (
     <>
-      {characters.length > 0 && (
+      {defaultItem.length > 0 && (
         <div className="d-flex divide">
           <div className="sub-title">{title}</div>
           <div className="content-info">
             <ul>
-              {characters.map(
+              {defaultItem.map(
                 (
                   chr: CharacterInfo | MonsterInfo | BossInfo | DungeonInfo,
                   index: number

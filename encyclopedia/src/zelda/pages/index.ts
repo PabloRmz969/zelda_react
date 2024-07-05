@@ -1,3 +1,5 @@
+export * from './BossesPage'
+export * from './DungeonsPage'
 export * from './GamesPage'
 export * from './HomePage'
 export * from './SingleGamePage'

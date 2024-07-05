@@ -42,10 +42,10 @@ export const Navbar = () => {
           <Link className="inverted-6" to="/games">
             Games
           </Link>
-          <Link className="inverted-6" to="/">
+          <Link className="inverted-6" to="/bosses">
             Bosses
           </Link>
-          <Link className="inverted-6" to="/">
+          <Link className="inverted-6" to="/dungeons">
             Dungeons
           </Link>
         </div>
