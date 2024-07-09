@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { BossInfo, CharacterInfo, MonsterInfo } from "../types";
 import { DungeonInfo } from "../types/DungeonInfo";
 type Props = {
@@ -16,9 +17,14 @@ export const ListInfo = ({ defaultItem, title }: Props) => {
                 (
                   chr: CharacterInfo | MonsterInfo | BossInfo | DungeonInfo,
                   index: number
-                ) => (
-                  <li key={`ch-${index}`}>{chr.name}</li>
-                )
+                ) =>
+                  title === "Dungeons" ? (
+                    <li key={`ch-${index}`}>
+                      <Link className="alink hover" to={`/dungeon/${chr.id}`}>{chr.name}</Link>
+                    </li>
+                  ) : (
+                    <li key={`ch-${index}`}>{chr.name}</li>
+                  )
               )}
             </ul>
           </div>

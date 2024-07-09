@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 export const functionsJq = () => {
+  const navigate = useNavigate();
   const back_org = (pos: JQuery<HTMLElement>) => {
     $(pos).css(
       "transform",
@@ -198,20 +201,19 @@ export const functionsJq = () => {
     const current_img = $(`.front-page-img.active`)
       .attr("id")
       ?.replace("img-", "");
-      if (current_img){
-        let indx = parseInt(current_img);
-        while (indx > 1) {
-          prev();
-          indx--;
-        }
+    if (current_img) {
+      let indx = parseInt(current_img);
+      while (indx > 1) {
+        prev();
+        indx--;
       }
-    
+    }
   };
 
   const onPageLoad = () => {
     setTimeout(() => {
       $(".shape-in").addClass("animate__slideOutLeft");
-    }, 300);
+    }, 400);
   };
 
   const chargingSlide = () => {
@@ -222,10 +224,35 @@ export const functionsJq = () => {
     }, 1300);
   };
 
+  const errorSearch = (word: string) => {
+    
+    const time = 2000;
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "center",
+      showConfirmButton: false,
+      timer: time,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: "warning",
+      title: `Error to find a ${word}`,
+    });
+    setTimeout(() => {
+      //navigate("/");
+    }, time);
+  };
+
   return {
     back_org,
     changeBullet,
     chargingSlide,
+    errorSearch,
     next,
     onPageLoad,
     prev,

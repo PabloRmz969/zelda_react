@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { DungeonInfo } from "../../zelda/types/DungeonInfo";
 
-
 interface DunState {
   dungeons: DungeonInfo[];
   isLoadingCh: boolean;
@@ -22,7 +21,11 @@ export const dungeonSlice = createSlice({
     setDungeons: (state, { payload }) => {
       state.dungeons = payload;
     },
+    startClearDungeons: (state) => {
+      state.dungeons = [];
+    },
   },
 });
 
-export const { setDungeons, startLoadingInfoDun } = dungeonSlice.actions;
+export const { setDungeons, startClearDungeons, startLoadingInfoDun } =
+  dungeonSlice.actions;

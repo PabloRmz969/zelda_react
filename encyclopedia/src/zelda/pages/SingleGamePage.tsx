@@ -21,7 +21,7 @@ export const SingleGamePage = () => {
   } = useZeldaStore();
 
   const { bosses, getBossesById } = useBossesStore();
-  const { dungeons, getDungeonsById } = useDungeonsStore();
+  const { dungeons, getDungeonsByGame } = useDungeonsStore();
 
   const { id } = useParams();
   useEffect(() => {
@@ -31,7 +31,7 @@ export const SingleGamePage = () => {
       getCharactersById(id);
       getMonstersById(id);
       getBossesById(id);
-      getDungeonsById(id);
+      getDungeonsByGame(id);
     }
   }, []);
 

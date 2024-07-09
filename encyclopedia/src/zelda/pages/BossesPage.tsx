@@ -3,10 +3,14 @@ import { useBossesStore } from "../../hooks";
 import { ShowInfo } from "../components";
 
 export const BossesPage = () => {
-  const { bosses, startSearchBosses } = useBossesStore();
+  const { bosses, clearBosses, startSearchBosses } = useBossesStore();
   useEffect(() => {
-    bosses.length < 1 && startSearchBosses();
+    if (bosses.length < 1) startSearchBosses();
+    else {
+      clearBosses();
+      startSearchBosses();
+    }
   }, []);
 
-  return <ShowInfo elements={bosses} title="Bosses"/>;
+  return <ShowInfo elements={bosses} title="Bosses" />;
 };

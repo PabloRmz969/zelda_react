@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { BossesPage, DungeonsPage, GamesPage, HomePage, SingleGamePage } from "../zelda";
 import { Navbar } from "../ui";
 import { useEffect } from "react";
+import { SingleDungeonPage } from "../zelda/pages/SingleDungeonPage";
 
 
 export const AppRouter = () => {
@@ -17,6 +18,7 @@ export const AppRouter = () => {
         <Route path="/games" element={<GamesPage />} />
         <Route path="/game/:id" element={<SingleGamePage />} />
         <Route path="/bosses" element={<BossesPage />} />
+        <Route path="/dungeon/:id" element={<SingleDungeonPage />} />
         <Route path="/dungeons" element={<DungeonsPage />} />
         <Route path="/*" element={<HomePage />} />
       </Routes>

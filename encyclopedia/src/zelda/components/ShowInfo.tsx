@@ -1,10 +1,11 @@
 import { Scrollbar } from "react-scrollbars-custom";
-import { BossInfo } from "../types";
+import { BossInfo, GenericInfo } from "../types";
 import { DungeonInfo } from "../types/DungeonInfo";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { functionsJq } from "../../helpers";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDungeon, faGamepad } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   elements: BossInfo[] | DungeonInfo[];
@@ -12,16 +13,15 @@ type Props = {
 };
 
 export const ShowInfo = ({ elements, title }: Props) => {
-  const {onPageLoad} = functionsJq();
+  const { onPageLoad } = functionsJq();
 
   useEffect(() => {
-    elements.map(element => console.log(typeof element))
+    elements.map((element) => console.log(typeof element));
   }, []);
 
   useEffect(() => {
     if (elements) {
-      console.log(elements)
-      if (elements.length > 0) {
+      if (elements.length > 1) {
         if (document.readyState === "complete") {
           onPageLoad();
         } else {
@@ -50,22 +50,65 @@ export const ShowInfo = ({ elements, title }: Props) => {
               <hr className="hr-synops" />
             </div>
             <Scrollbar className="content-right-game">
-              {elements.map(
-                (element, index: number) => (
-                  <div className="d-flex divide" key={`el-${index}`}>
-                    <div className="sub-title">{element.name}</div>
-                    <div className="content-info">
-                        {element.description}<br></br>
-                        {
-                          ('dungeons' in element) && element.dungeons.map((dungeon) => (
-                            
-                            <Link to={`/`} > aquí</Link>
-                          ))
-                        }
-                    </div>
+              {elements.map((element, index: number) => (
+                <div className="d-flex divide" key={`el-${index}`}>
+                  <div className="sub-title">{element.name}</div>
+                  <div className="content-info">
+                    {element.description}
+                    {("dungeonsInfo" in element ||
+                      "appearancesInfo" in element) && (
+                      <div className="d-flex dungeonsAppearances">
+                        {"appearancesInfo" in element &&
+                          element.appearancesInfo.length > 0 && (
+                            <div className={
+                              "dungeonsInfo" in element && element.dungeonsInfo.length > 0 ? "w-50" : "w-100"
+                            }>
+                              <h4>Appearances</h4>
+                              <ul className="custom-list">
+                                {element.appearancesInfo.map(
+                                  (game: GenericInfo, index: number) => (
+                                    <li key={`link_app${index}`}>
+                                      <FontAwesomeIcon className="icon-list" icon={faGamepad}/>
+                                      <Link
+                                        to={`/game/${game.id}`}
+                                        className="alink hover"
+                                      >
+                                        {game.name}
+                                      </Link>
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
+                          )}
+                        {"dungeonsInfo" in element &&
+                          element.dungeonsInfo.length > 0 && (
+                            <div className={
+                              "appearancesInfo" in element && element.appearancesInfo.length > 0 ? "w-50" : "w-100"
+                            }>
+                              <h4>Dungeons</h4>
+                              <ul className="custom-list">
+                                {element.dungeonsInfo.map(
+                                  (dungeon: GenericInfo) => (
+                                    <li key={`link_dunge_${dungeon.name}_${index}`}>
+                                      <FontAwesomeIcon className="icon-list" icon={faDungeon} />
+                                      <Link
+                                        to={`/dungeon/${dungeon.id}`}
+                                        className="alink hover"
+                                      >
+                                        {dungeon.name}
+                                      </Link>
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
+                          )}
+                      </div>
+                    )}
                   </div>
-                )
-              )}
+                </div>
+              ))}
             </Scrollbar>
           </div>
         </div>

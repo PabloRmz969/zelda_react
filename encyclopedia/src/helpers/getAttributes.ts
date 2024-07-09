@@ -43,6 +43,7 @@ export const getAttributes = () => {
   };
 
   const assignNewInfo = (bosses_data: BossInfo[], arr: any, typ: string) => {
+    
     for (let i = 0; i < bosses_data.length; i++) {
       let ele_bs: string[];
       if (typ === "games") {
@@ -60,7 +61,7 @@ export const getAttributes = () => {
           const name = getName(app_id, arr);
           name != "" && tmp_arr.push({ id: app_id, name });
         }
-      }
+      }      
       switch (typ) {
         case "games":
           bosses_data[i].appearancesInfo = tmp_arr;

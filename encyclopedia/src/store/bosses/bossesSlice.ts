@@ -21,7 +21,10 @@ export const bossesSlice = createSlice({
     setBosses: (state, { payload }) => {
       state.bosses = payload;
     },
+    startClearBosses: (state) => {
+      state.bosses =  [];
+    }
   },
 });
 
-export const { setBosses,startLoadingInfoBos } = bossesSlice.actions;
+export const { setBosses,startClearBosses, startLoadingInfoBos } = bossesSlice.actions;

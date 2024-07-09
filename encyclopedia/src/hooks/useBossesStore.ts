@@ -1,5 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ZeldaState, setBosses, startLoadingInfoBos } from "../store";
+import {
+  ZeldaState,
+  setBosses,
+  startClearBosses,
+  startLoadingInfoBos,
+} from "../store";
 import { ZeldaApi } from "../api";
 import { BossInfo } from "../zelda";
 
@@ -26,6 +31,10 @@ export const useBossesStore = () => {
     }
   };
 
+  const clearBosses = () => {
+    dispatch(startClearBosses());
+  };
+
   const getBossesById = async (id: string) => {
     dispatch(startLoadingInfoBos());
     try {
@@ -45,6 +54,9 @@ export const useBossesStore = () => {
   };
   return {
     bosses,
+
+    
+    clearBosses,
     getBossesById,
     startSearchBosses,
   };

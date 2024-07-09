@@ -12,12 +12,15 @@ import {
   startLoadingInfoCh,
 } from "../store/characters/characterSlice";
 import { setMonsters, startLoadingInfoMn } from "../store/monster/monsterSlice";
+import { functionsJq } from "../helpers";
 
 export const useZeldaStore = () => {
   const dispatch = useDispatch();
+  const {errorSearch} = functionsJq();
   const { games } = useSelector((state: ZeldaState) => state.description);
   const { characters } = useSelector((state: ZeldaState) => state.characters);
   const { monsters } = useSelector((state: ZeldaState) => state.monsters);
+  
 
   const startSearchGames = async () => {
     dispatch(startLoadingInfo());
@@ -34,7 +37,7 @@ export const useZeldaStore = () => {
         games_data[i].image = ok
           ? `/public/images/games/front/${image}`
           : image;
-        games_data[i].video = ok && video
+        games_data[i].video = ok && video;
       }
 
       games_data = games_data.filter(
@@ -42,6 +45,7 @@ export const useZeldaStore = () => {
       );
       dispatch(setGames(games_data));
     } catch (error) {
+      errorSearch('game');
       console.error(error);
     }
   };
@@ -59,12 +63,13 @@ export const useZeldaStore = () => {
       );
       let { ok, image, video } = data_c;
       games_data.image = ok ? `/public/images/games/front/${image}` : image;
-      games_data.video = ok && video
+      games_data.video = ok && video;
 
       const games_res = [games_data];
 
       dispatch(setGames(games_res));
     } catch (error) {
+      errorSearch('game');
       console.error(error);
     }
   };
@@ -72,7 +77,7 @@ export const useZeldaStore = () => {
   const getCharactersById = async (id: string) => {
     dispatch(startLoadingInfoCh());
     try {
-      const { data } = await ZeldaApi.get("/characters");
+      const { data } = await ZeldaApi.get("/characters?limit=50");
       let { data: characters_data } = data;
       let response: CharacterInfo[] = [];
       characters_data.filter((character: CharacterInfo) => {
@@ -83,6 +88,7 @@ export const useZeldaStore = () => {
       });
       dispatch(setCharacters(response));
     } catch (error) {
+      errorSearch('character');
       console.error(error);
     }
   };
@@ -101,6 +107,7 @@ export const useZeldaStore = () => {
       });
       dispatch(setMonsters(response));
     } catch (error) {
+      errorSearch('monster');
       console.error(error);
     }
   };
