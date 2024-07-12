@@ -1,7 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+
+
+
 export const functionsJq = () => {
-  const navigate = useNavigate();
+  
+
   const back_org = (pos: JQuery<HTMLElement>) => {
     $(pos).css(
       "transform",
@@ -225,7 +228,6 @@ export const functionsJq = () => {
   };
 
   const errorSearch = (word: string) => {
-    
     const time = 2000;
     const Toast = Swal.mixin({
       toast: true,

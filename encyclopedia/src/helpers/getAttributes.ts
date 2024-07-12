@@ -1,5 +1,7 @@
 import { ZeldaApi } from "../api";
-import { BossInfo, GameInfo, GenericInfo } from "../zelda";
+import { BossInfo, GameInfo, GenericInfo, MonsterInfo } from "../zelda";
+import { DungeonInfo } from "../zelda/types/DungeonInfo";
+import { CharacterInfo } from "../zelda/types/CharacterInfo";
 
 export const getAttributes = () => {
   const getName = (id: string, arr: GameInfo[] | any) => {
@@ -19,8 +21,6 @@ export const getAttributes = () => {
     }
   };
 
-
-
   const generateArr = async (word: string) => {
     try {
       let data_response: any = [];
@@ -28,7 +28,7 @@ export const getAttributes = () => {
         let { data } = await ZeldaApi.get(`/${word}?limit=50`);
         let { data: tmp_data } = data;
         appendArray(tmp_data, data_response);
-      } else if (word == "dungeons") {
+      } else  {
         for (let i = 0; i < 8; i++) {
           let { data } = await ZeldaApi.get(`/${word}?limit=50&page=${i}`);
           let { data: tmp_data } = data;
@@ -43,7 +43,6 @@ export const getAttributes = () => {
   };
 
   const assignNewInfo = (bosses_data: BossInfo[], arr: any, typ: string) => {
-    
     for (let i = 0; i < bosses_data.length; i++) {
       let ele_bs: string[];
       if (typ === "games") {
@@ -61,7 +60,7 @@ export const getAttributes = () => {
           const name = getName(app_id, arr);
           name != "" && tmp_arr.push({ id: app_id, name });
         }
-      }      
+      }
       switch (typ) {
         case "games":
           bosses_data[i].appearancesInfo = tmp_arr;
@@ -74,7 +73,23 @@ export const getAttributes = () => {
       }
     }
   };
+
+  const getByGame = (elements: CharacterInfo[] | DungeonInfo[] | MonsterInfo[], id: string) => {
+    let tmp_arr = [];
+    for (let i = 0; i < elements.length; i++) {
+      const apr = elements[i].appearances;
+      for (let j = 0; j < apr.length; j++) {
+        const game_id = apr[j].replace(
+          "https://zelda.fanapis.com/api/games/",
+          ""
+        );
+        game_id === id && tmp_arr.push(elements[i]);
+      }
+    }
+    return tmp_arr;
+  };
   return {
+    getByGame,
     getName,
     generateArr,
     assignNewInfo,

@@ -38,25 +38,35 @@ export const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-sm navbar-zelda nav-desktop">
-        <div className="menu-desktop">
-          <Link className="inverted-6" to="/games">
-            Games
-          </Link>
-          <Link className="inverted-6" to="/bosses">
-            Bosses
-          </Link>
-          <Link className="inverted-6" to="/dungeons">
-            Dungeons
-          </Link>
-        </div>
-        <div className="logo">
-          <Link to="/">
-            <img
-              src="/public/images/zelda-logo.png"
-              alt="Zelda"
-              className="logo-img"
-            />
-          </Link>
+        <div className="menu-desktop d-flex">
+          <div className="menu-left-desktop">
+            <Link className="inverted-6" to="/games">
+              Games
+            </Link>
+            <Link className="inverted-6" to="/bosses">
+              Bosses
+            </Link>
+            <Link className="inverted-6" to="/characters">
+              Characters
+            </Link>
+          </div>
+          <div className="logo">
+            <Link to="/">
+              <img
+                src="/public/images/zelda-logo.png"
+                alt="Zelda"
+                className="logo-img"
+              />
+            </Link>
+          </div>
+          <div className="menu-right-desktop">
+            <Link className="inverted-6" to="/dungeons">
+              Dungeons
+            </Link>
+            <Link className="inverted-6" to="/monsters">
+              Monsters
+            </Link>
+          </div>
         </div>
       </nav>
       <nav className="navbar nav-mobile">
@@ -76,17 +86,29 @@ export const Navbar = () => {
           </div>
           <ul>
             <li>
-              <Link className="inverted-6" to="/">
+              <Link
+                className="inverted-6"
+                to="/games"
+                onClick={closeMobileMenu}
+              >
                 Games
               </Link>
             </li>
             <li>
-              <Link className="inverted-6" to="/">
+              <Link
+                className="inverted-6"
+                to="/bosses"
+                onClick={closeMobileMenu}
+              >
                 Bosses
               </Link>
             </li>
             <li>
-              <Link className="inverted-6" to="/">
+              <Link
+                className="inverted-6"
+                to="/dungeons"
+                onClick={closeMobileMenu}
+              >
                 Dungeons
               </Link>
             </li>

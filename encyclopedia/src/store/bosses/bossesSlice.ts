@@ -3,6 +3,7 @@ import { BossInfo } from "../../zelda";
 
 interface BosState {
   bosses: BossInfo[];
+  defBoss?: BossInfo[];
   isLoadingBos: boolean;
 }
 
@@ -21,10 +22,22 @@ export const bossesSlice = createSlice({
     setBosses: (state, { payload }) => {
       state.bosses = payload;
     },
+    setDefBoss: (state, { payload }) => {
+      state.defBoss = payload;
+    },
     startClearBosses: (state) => {
-      state.bosses =  [];
-    }
+      state.bosses = [];
+    },
+    startClearDefBoss: (state) => {
+      state.defBoss = [];
+    },
   },
 });
 
-export const { setBosses,startClearBosses, startLoadingInfoBos } = bossesSlice.actions;
+export const {
+  setDefBoss,
+  startClearDefBoss,
+  setBosses,
+  startClearBosses,
+  startLoadingInfoBos,
+} = bossesSlice.actions;

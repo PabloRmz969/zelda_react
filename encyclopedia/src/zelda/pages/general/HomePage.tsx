@@ -20,8 +20,7 @@ export const HomePage = () => {
         </div>
         <div className="pargh-rec right">
           <p className="text-botw text-center animate__animated animate__fadeInUp">
-            Use our advice to defeat that boss or finish the dungeons in that
-            Zelda game.
+            Discover a little bit more about every Zelda game throughout time.
           </p>
         </div>
       </div>

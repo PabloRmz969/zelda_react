@@ -3,6 +3,7 @@ import { DungeonInfo } from "../../zelda/types/DungeonInfo";
 
 interface DunState {
   dungeons: DungeonInfo[];
+  defDungeon?: DungeonInfo[];
   isLoadingCh: boolean;
 }
 
@@ -21,11 +22,23 @@ export const dungeonSlice = createSlice({
     setDungeons: (state, { payload }) => {
       state.dungeons = payload;
     },
+    setDefDungeon: (state, { payload }) => {
+      state.defDungeon = payload;
+    },
     startClearDungeons: (state) => {
+      state.dungeons = [];
+    },
+    startClearDungeon: (state) => {
       state.dungeons = [];
     },
   },
 });
 
-export const { setDungeons, startClearDungeons, startLoadingInfoDun } =
-  dungeonSlice.actions;
+export const {
+  setDefDungeon,
+  startClearDungeon,
+
+  setDungeons,
+  startClearDungeons,
+  startLoadingInfoDun,
+} = dungeonSlice.actions;

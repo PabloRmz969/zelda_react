@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useBossesStore } from "../../hooks";
-import { ShowInfo } from "../components";
+import { useBossesStore } from "../../../hooks";
+import { ShowInfo } from "../../components";
 
 export const BossesPage = () => {
   const { bosses, clearBosses, startSearchBosses } = useBossesStore();

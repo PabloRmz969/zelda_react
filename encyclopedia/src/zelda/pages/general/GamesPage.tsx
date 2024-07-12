@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { useZeldaStore } from "../../hooks";
-import { Bullets, Fronts, Titles } from "../components";
-import { functionsJq } from "../../helpers";
-import { GameInfo } from "../types";
+import { useZeldaStore } from "../../../hooks";
+import { Bullets, Fronts, Titles } from "../../components";
+import { functionsJq } from "../../../helpers";
+import { GameInfo } from "../../types";
 
 export const GamesPage = () => {
   const { clearGamesA, startSearchGames, games } = useZeldaStore();

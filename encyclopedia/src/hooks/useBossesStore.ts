@@ -2,30 +2,33 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   ZeldaState,
   setBosses,
+  setDefBoss,
   startClearBosses,
+  startClearDefBoss,
   startLoadingInfoBos,
 } from "../store";
 import { ZeldaApi } from "../api";
 import { BossInfo } from "../zelda";
 
-import { getAttributes } from "../helpers";
+import { functionsJq, getAttributes } from "../helpers";
 
 export const useBossesStore = () => {
   const dispatch = useDispatch();
-  const { bosses } = useSelector((state: ZeldaState) => state.bosses);
-  const { generateArr, assignNewInfo } = getAttributes();
+  const { bosses, defBoss } = useSelector((state: ZeldaState) => state.bosses);
+  const { generateArr, assignNewInfo, getByGame } = getAttributes();
+  const { errorSearch } = functionsJq();
 
   const startSearchBosses = async () => {
     dispatch(startLoadingInfoBos());
     const games_res = await generateArr("games");
     const dungeons_res = await generateArr("dungeons");
     try {
-      const { data } = await ZeldaApi.get("/bosses");
-      let { data: bosses_data } = data;
-      assignNewInfo(bosses_data, games_res, "games");
-      assignNewInfo(bosses_data, dungeons_res, "dungeons");
+      const bosses_res = await generateArr("bosses");
 
-      dispatch(setBosses(bosses_data));
+      assignNewInfo(bosses_res, games_res, "games");
+      assignNewInfo(bosses_res, dungeons_res, "dungeons");
+
+      dispatch(setBosses(bosses_res));
     } catch (error) {
       console.error(error);
     }
@@ -35,29 +38,59 @@ export const useBossesStore = () => {
     dispatch(startClearBosses());
   };
 
-  const getBossesById = async (id: string) => {
+  const clearDefBoss = () => {
+    dispatch(startClearDefBoss());
+  };
+
+  const startSearchBoss = async (id: string) => {
     dispatch(startLoadingInfoBos());
     try {
-      const { data } = await ZeldaApi.get("/bosses");
+      const games_res = await generateArr("games");
+      const { data } = await ZeldaApi.get(`/bosses/${id}`);
       let { data: bosses_data } = data;
       let response: BossInfo[] = [];
-      bosses_data.filter((boss: BossInfo) => {
-        const appearances = boss.appearances;
-        for (const i in appearances) {
-          boss.appearances[i].includes(id) && response.push(boss);
-        }
-      });
+      response.push(bosses_data);
+      assignNewInfo(response, games_res, "games");
+
+      console.log(response);
       dispatch(setBosses(response));
     } catch (error) {
-      console.error(error);
+      errorSearch("boss");
+      console.log(error);
     }
   };
-  return {
-    bosses,
 
-    
+  const getBossesByGame = async (id: string) => {
+    dispatch(startLoadingInfoBos());
+    if(bosses)
+      if(bosses.length < 1){
+        try {
+          const bosses_res = await generateArr("bosses");
+          let response: BossInfo[] = [];
+          bosses_res.filter((boss: BossInfo) => {
+            const appearances = boss.appearances;
+            for (const i in appearances) {
+              boss.appearances[i].includes(id) && response.push(boss);
+            }
+          });
+          dispatch(setDefBoss(response));
+          dispatch(setBosses(bosses_res));
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        dispatch(setDefBoss(getByGame(bosses,id)));  
+      }
+   
+  };
+  return {
+    defBoss,
+    clearDefBoss,
+
+    bosses,
     clearBosses,
-    getBossesById,
+    startSearchBoss,
+    getBossesByGame,
     startSearchBosses,
   };
 };

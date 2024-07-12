@@ -6,11 +6,8 @@ import {
   clearGames,
 } from "../store/game/descriptionSlice";
 import { ZeldaState } from "../store";
-import { CharacterInfo, GameInfo, MonsterInfo } from "../zelda/types";
-import {
-  setCharacters,
-  startLoadingInfoCh,
-} from "../store/characters/characterSlice";
+import {  GameInfo, MonsterInfo } from "../zelda/types";
+
 import { setMonsters, startLoadingInfoMn } from "../store/monster/monsterSlice";
 import { functionsJq } from "../helpers";
 
@@ -74,43 +71,7 @@ export const useZeldaStore = () => {
     }
   };
 
-  const getCharactersById = async (id: string) => {
-    dispatch(startLoadingInfoCh());
-    try {
-      const { data } = await ZeldaApi.get("/characters?limit=50");
-      let { data: characters_data } = data;
-      let response: CharacterInfo[] = [];
-      characters_data.filter((character: CharacterInfo) => {
-        const appearances = character.appearances;
-        for (const i in appearances) {
-          character.appearances[i].includes(id) && response.push(character);
-        }
-      });
-      dispatch(setCharacters(response));
-    } catch (error) {
-      errorSearch('character');
-      console.error(error);
-    }
-  };
-
-  const getMonstersById = async (id: string) => {
-    dispatch(startLoadingInfoMn());
-    try {
-      const { data } = await ZeldaApi.get("/monsters");
-      let { data: monsters_data } = data;
-      let response: MonsterInfo[] = [];
-      monsters_data.filter((monster: MonsterInfo) => {
-        const appearances = monster.appearances;
-        for (const i in appearances) {
-          monster.appearances[i].includes(id) && response.push(monster);
-        }
-      });
-      dispatch(setMonsters(response));
-    } catch (error) {
-      errorSearch('monster');
-      console.error(error);
-    }
-  };
+  
 
   return {
     characters,
@@ -119,8 +80,7 @@ export const useZeldaStore = () => {
 
     clearGamesA,
     getGame,
-    getMonstersById,
-    getCharactersById,
+
     startSearchGames,
   };
 };

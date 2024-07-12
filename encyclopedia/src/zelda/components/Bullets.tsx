@@ -34,7 +34,7 @@ export const Bullets = ({ gamePerPage, noPage }: Props) => {
             className={
               index === 0 ? "container-bullet active" : "container-bullet"
             }
-            onClick={() => changeBullet(plus + index + 1)}
+            onClickCapture={()=>changeBullet(plus + index + 1)}
           >
             <FontAwesomeIcon
               icon={faSquare}

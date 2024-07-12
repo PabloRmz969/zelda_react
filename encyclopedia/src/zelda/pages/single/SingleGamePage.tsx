@@ -1,36 +1,36 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useZeldaStore } from "../../hooks";
-import { GameInfo } from "../types";
-import { useBossesStore } from "../../hooks/useBossesStore";
-import { useDungeonsStore } from "../../hooks/useDungeonsStore";
+import { useMonstersStore, useZeldaStore } from "../../../hooks";
+import { GameInfo } from "../../types";
+import { useBossesStore } from "../../../hooks/useBossesStore";
+import { useDungeonsStore } from "../../../hooks/useDungeonsStore";
 import { Scrollbar } from "react-scrollbars-custom";
-import { ListInfo } from "../components/ListInfo";
-import { functionsJq } from "../../helpers";
+import { ListInfo } from "../../components/ListInfo";
+import { functionsJq } from "../../../helpers";
+import { useCharactersStore } from "../../../hooks/useCharactersStore";
 
 export const SingleGamePage = () => {
   const {onPageLoad} = functionsJq();
   const {
     clearGamesA,
     getGame,
-    getMonstersById,
-    getCharactersById,
     games,
-    characters,
     monsters,
   } = useZeldaStore();
 
-  const { bosses, getBossesById } = useBossesStore();
-  const { dungeons, getDungeonsByGame } = useDungeonsStore();
+  const { defBoss, getBossesByGame } = useBossesStore();
+  const { defDungeon, getDungeonsByGame } = useDungeonsStore();
+  const{ defCharacter, getCharactersByGame} = useCharactersStore();
+  const { getMonstersByGame } = useMonstersStore();
 
   const { id } = useParams();
   useEffect(() => {
     clearGamesA();
     if (id) {
       getGame(id);
-      getCharactersById(id);
-      getMonstersById(id);
-      getBossesById(id);
+      getCharactersByGame(id);
+      getMonstersByGame(id);
+      getBossesByGame(id);
       getDungeonsByGame(id);
     }
   }, []);
@@ -62,9 +62,9 @@ export const SingleGamePage = () => {
             </div>
           </div>
           <div className="right-side">
-            <div className="contet-synops">
+            <div className="content-synops">
               <div className="fix sinopsis">
-                <h2>Conent</h2>
+                <h2>Content</h2>
                 <hr className="hr-synops" />
               </div>
               <Scrollbar className="content-right-game">
@@ -76,14 +76,13 @@ export const SingleGamePage = () => {
                   <div className="sub-title">Released date</div>
                   <div className="content-info">{game.released_date}</div>
                 </div>
-                <ListInfo defaultItem={characters} title="Characters" />
+                <ListInfo defaultItem={defCharacter} title="Characters" />
                 <ListInfo defaultItem={monsters} title="Monsters" />
-                <ListInfo defaultItem={bosses} title="Bosses" />
-                <ListInfo defaultItem={dungeons} title="Dungeons" />
+                <ListInfo defaultItem={defBoss} title="Bosses" />
+                <ListInfo defaultItem={defDungeon} title="Dungeons" />
                 <div className="text-center mt-5">
                   <iframe
-                    width="560"
-                    height="315"
+                    className="video-frame"
                     src={game.video}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
