@@ -1,21 +1,45 @@
 import { Scrollbar } from "react-scrollbars-custom";
 import { BossInfo, CharacterInfo, GenericInfo, MonsterInfo } from "../types";
 import { DungeonInfo } from "../types/DungeonInfo";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { functionsJq } from "../../helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDungeon, faGamepad } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
-  elements: undefined | BossInfo[] | DungeonInfo[] | CharacterInfo[] | MonsterInfo[];
+  elements:
+    | undefined
+    | BossInfo[]
+    | DungeonInfo[]
+    | CharacterInfo[]
+    | MonsterInfo[];
   title: string;
 };
 
 export const ShowInfo = ({ elements, title }: Props) => {
   const { onPageLoad } = functionsJq();
+  const [typ, setTyp] = useState("");
 
-
+  useEffect(() => {
+    if (title.length > 0)
+      switch (title) {
+        case "Bosses":
+          setTyp("boss");
+          break;
+        case "Characters":
+          setTyp("character");
+          break;
+        case "Dungeons":
+          setTyp("dungeon");
+          break;
+        case "Monsters":
+          setTyp("monster");
+          break;
+        default:
+          break;
+      }
+  }, [title]);
 
   useEffect(() => {
     if (elements) {
@@ -29,7 +53,7 @@ export const ShowInfo = ({ elements, title }: Props) => {
         }
       }
     }
-    console.log(elements)
+    console.log(elements);
   }, [elements]);
 
   return (
@@ -52,7 +76,7 @@ export const ShowInfo = ({ elements, title }: Props) => {
               {elements &&
                 elements.map((element, index: number) => (
                   <div className="d-flex divide" key={`el-${index}`}>
-                    <div className="sub-title">{element.name}</div>
+                    <div className="sub-title"><Link to={`/${typ}`} className="alink hover">{element.name}</Link></div>
                     <div className="content-info">
                       {element.description}
                       {("dungeonsInfo" in element ||
@@ -104,7 +128,10 @@ export const ShowInfo = ({ elements, title }: Props) => {
                                   {element.dungeonsInfo.map(
                                     (dungeon: GenericInfo) => (
                                       <li
-                                        key={`link_dunge_${dungeon.name.replace(' ','')}_${index}`}
+                                        key={`link_dunge_${dungeon.name.replace(
+                                          " ",
+                                          ""
+                                        )}_${index}`}
                                       >
                                         <FontAwesomeIcon
                                           className="icon-list"
