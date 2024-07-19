@@ -200,7 +200,7 @@ export const functionsJq = () => {
     }
   };
 
-  const reset_bullet = (noPage: number) => {
+  const reset_bullet = () => {
     const current_img = $(`.front-page-img.active`)
       .attr("id")
       ?.replace("img-", "");

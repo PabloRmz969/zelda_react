@@ -65,11 +65,10 @@ export const GamesPage = () => {
     event: React.ChangeEvent<unknown>,
     newPage: number
   ) => {
-
     chargingSlide();
     setTimeout(() => {
       setNoPage(newPage);
-      reset_bullet(newPage);      
+      reset_bullet();      
     }, 700);
   };
 

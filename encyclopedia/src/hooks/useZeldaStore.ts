@@ -6,9 +6,8 @@ import {
   clearGames,
 } from "../store/game/descriptionSlice";
 import { ZeldaState } from "../store";
-import {  GameInfo, MonsterInfo } from "../zelda/types";
+import {  GameInfo } from "../zelda/types";
 
-import { setMonsters, startLoadingInfoMn } from "../store/monster/monsterSlice";
 import { functionsJq } from "../helpers";
 
 export const useZeldaStore = () => {

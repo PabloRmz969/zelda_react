@@ -15,6 +15,7 @@ export const Bullets = ({ gamePerPage, noPage }: Props) => {
   const { games } = useZeldaStore();
   const { changeBullet } = functionsJq();
   const [plus, setPlus] = useState(0);
+  
 
   useEffect(() => {
     setPlus((noPage - 1) * 8);
