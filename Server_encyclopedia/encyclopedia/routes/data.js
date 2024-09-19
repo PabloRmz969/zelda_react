@@ -8,7 +8,7 @@ const router = Router();
 
 const {getFront} = require('../controllers/data');
 
-router.get(
+router.post(
     '/',
     [],
     getFront

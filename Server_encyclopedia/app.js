@@ -31,7 +31,7 @@ app.use('/testing', async (req, res) => {
 // Start the server
 const PORT = parseInt(process.env.PORT) || 8080;
 app.listen(PORT, () => {
-    console.log(`App listening on pport ${PORT}`);
+    console.log(`App listening on port ${PORT}`);
     console.log('Press Ctrl+C to quit.');
 });
 
