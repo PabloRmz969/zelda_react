@@ -216,7 +216,7 @@ export const functionsJq = () => {
   const onPageLoad = () => {
     setTimeout(() => {
       $(".shape-in").addClass("animate__slideOutLeft");
-    }, 400);
+    }, 350);
   };
 
   const chargingSlide = () => {
