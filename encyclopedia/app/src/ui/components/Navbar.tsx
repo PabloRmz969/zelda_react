@@ -108,10 +108,28 @@ export const Navbar = () => {
             <li>
               <Link
                 className="inverted-6"
+                to="/characters"
+                onClick={closeMobileMenu}
+              >
+                Characters
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="inverted-6"
                 to="/dungeons"
                 onClick={closeMobileMenu}
               >
                 Dungeons
+              </Link>
+            </li>            
+            <li>
+              <Link
+                className="inverted-6"
+                to="/monsters"
+                onClick={closeMobileMenu}
+              >
+                Monsters
               </Link>
             </li>
           </ul>
