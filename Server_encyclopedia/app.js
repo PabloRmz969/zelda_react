@@ -22,9 +22,7 @@ app.get('/', (req, res) => {
 });
 
 //Rutas
-app.use('/encyclopedia/info',async (req, res) => {
-    res.send("Testing!")
-});
+app.use('/encyclopedia/info', require('./encyclopedia/routes/data'));
 app.use('/testing', async (req, res) => {
     res.send("Testing!")
 });

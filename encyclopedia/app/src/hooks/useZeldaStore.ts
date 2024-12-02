@@ -19,6 +19,7 @@ export const useZeldaStore = () => {
   
 
   const startSearchGames = async () => {
+    
     dispatch(startLoadingInfo());
     try {
       const { data } = await ZeldaApi.get("/games?limit=50");
@@ -30,6 +31,7 @@ export const useZeldaStore = () => {
           `/encyclopedia/info?id=${id}`
         );
         let { ok, image, video } = data_c;
+        console.log(data_c)
         games_data[i].image = ok
           ? `/images/games/front/${image}`
           : image;
